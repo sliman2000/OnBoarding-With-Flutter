@@ -40,67 +40,65 @@ class _OnBoardingState extends State<OnBoarding> {
     _addPages();
 
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            padding: EdgeInsets.only(bottom: 70),
-            child: PageView.builder(
-              controller: controller,
-              itemBuilder: ((context, index) {
-                return Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: ExactAssetImage(pages[index].image!),
-                            fit: BoxFit.cover),
+      body: Container(
+        padding: EdgeInsets.only(bottom: 80),
+        child: PageView.builder(
+          controller: controller,
+          itemBuilder: ((context, index) {
+            return Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: ExactAssetImage(pages[index].image!),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+                Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Transform.translate(
+                        offset: Offset(0, -100),
+                        child: Icon(
+                          pages[index].icon,
+                          size: 150,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Transform.translate(
-                          offset: Offset(0, -100),
-                          child: Icon(
-                            pages[index].icon,
-                            size: 150,
+                      Text(
+                        pages[index].title!,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
                             color: Colors.white,
-                          ),
-                        ),
-                        Text(
-                          pages[index].title!,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 48, right: 48),
+                        child: Text(
+                          pages[index].description!,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 48, right: 48),
-                          child: Text(
-                            pages[index].description!,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              }),
-              itemCount: pages.length,
-              onPageChanged: (index) => setState(() {
-                isLastPage = index == 3;
-              }),
-            ),
-          ),
-        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }),
+          itemCount: pages.length,
+          onPageChanged: (index) => setState(() {
+            isLastPage = index == 3;
+          }),
+        ),
       ),
       bottomSheet: isLastPage
           ? SizedBox(
               width: double.infinity,
-              height: 70,
+              height: 80,
               child: ElevatedButton(
                   child: Text(
                     'GET STARTED',
@@ -119,7 +117,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   }))
           : Container(
               color: Colors.grey.shade900,
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               height: 80,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
